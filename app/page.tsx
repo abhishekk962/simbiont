@@ -1,19 +1,61 @@
-import Image from "next/image";
 import { MuseoModerno } from "next/font/google";
-import "./globals.css";
-  
+import { auth0 } from "@/lib/auth0";
+import Profile from "@/components/Profile";
+import Image from "next/image";
+import AuthButton from "@/components/AuthButton";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
+
 const museoModerno = MuseoModerno({
   variable: "--font-museo-moderno",
   subsets: ["latin"],
 });
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth0.getSession();
+  const user = session?.user;
+
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-center p-24`}
-    >
-      <h1 className={`text-4xl font-bold ${museoModerno.className} font-medium`}>simbiont</h1>
-      <p className="mt-4 text-lg">A creative intelligence canvas.</p>
-    </main>
+    <div className="flex min-h-screen w-full flex-col items-center justify-center px-4 bg-[url(/background-image.jpg)] bg-cover">
+      <Empty className="max-h-fit bg-white shadow-lg">
+        <EmptyHeader>
+          <EmptyMedia variant="default">
+            <Image
+              className="p-1"
+              src="/logo.svg"
+              alt="simbiont logo"
+              width={200}
+              height={200}
+              priority
+            />
+          </EmptyMedia>
+          <EmptyTitle
+            className={`text-4xl ${museoModerno.className} font-medium`}
+          >
+            simbiont
+          </EmptyTitle>
+          <EmptyDescription className="text-lg">
+            A creative intelligence canvas.
+          </EmptyDescription>
+        </EmptyHeader>
+        {user ? (
+          <EmptyContent className="flex-row justify-center gap-2">
+            <Profile />
+            <AuthButton children="Log Out" type="logout" />
+          </EmptyContent>
+        ) : (
+          <EmptyContent className="flex-row justify-center gap-2">
+            <AuthButton children="Get Started" variant="outline" type="login"/>
+            <AuthButton children="Log In" type="login" />
+          </EmptyContent>
+        )}
+      </Empty>
+    </div>
   );
 }
