@@ -117,3 +117,17 @@
     @apply border-border outline-ring/50;}
   body {
     @apply bg-background text-foreground;}}
+
+.hero-animate {
+  animation: heroAnimate 1s linear;
+}
+
+@keyframes heroAnimate {
+  0% {
+    filter: blur(40px);
+  }
+  100% {
+    filter: blur(0);
+  }
+}
+
