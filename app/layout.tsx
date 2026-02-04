@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { League_Spartan } from "next/font/google";
-import "./globals.css";
 import { Auth0Provider } from "@auth0/nextjs-auth0/client";
+import "./globals.css";
 
 const leagueSpartan = League_Spartan({
   variable: "--font-league-spartan",

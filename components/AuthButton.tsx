@@ -8,5 +8,6 @@ export default function AuthButton({children, variant, type}: {children: React.R
     >
       {children}
     </a>
+    
   );
 }

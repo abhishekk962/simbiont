@@ -18,9 +18,9 @@ const museoModerno = MuseoModerno({
   subsets: ["latin"],
 });
 
-export default async function AuthContainer({ className }: { className?: string }) {
-  const session = await auth0.getSession();
-  const user = session?.user;
+export default async function AuthContainer({ className, user }: { className?: string, user?: any }) {
+  // const session = await auth0.getSession();
+  // const user = session?.user;
   return (
     <div className={className + " hero-animate"}>
     <Empty className="max-h-fit">
@@ -51,8 +51,7 @@ export default async function AuthContainer({ className }: { className?: string 
         </EmptyContent>
       ) : (
         <EmptyContent className="flex-row justify-center gap-2">
-          <AuthButton children="Get Started" variant="outline" type="login" />
-          <AuthButton children="Log In" type="login" />
+          <AuthButton children="Get started" variant="outline" type="login" />
         </EmptyContent>
       )}
     </Empty>
