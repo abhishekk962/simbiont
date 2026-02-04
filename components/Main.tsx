@@ -9,6 +9,8 @@ import {
   BackgroundVariant,
   Background,
 } from "@xyflow/react";
+import TopLeftPanel from "./TepLeftPanel";
+
 
 function CanvasComponent() {
   const reactFlowWrapper = useRef(null);
@@ -35,6 +37,7 @@ function CanvasComponent() {
           bgColor="#eeede9"
         />
       </ReactFlow>
+      <TopLeftPanel/>
     </div>
   );
 }

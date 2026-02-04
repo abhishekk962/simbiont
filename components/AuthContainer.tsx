@@ -1,5 +1,4 @@
 import { MuseoModerno } from "next/font/google";
-import { auth0 } from "@/lib/auth0";
 import Profile from "@/components/Profile";
 import Image from "next/image";
 import AuthButton from "@/components/AuthButton";
@@ -19,8 +18,7 @@ const museoModerno = MuseoModerno({
 });
 
 export default async function AuthContainer({ className, user }: { className?: string, user?: any }) {
-  // const session = await auth0.getSession();
-  // const user = session?.user;
+
   return (
     <div className={className + " hero-animate"}>
     <Empty className="max-h-fit">
