@@ -36,11 +36,11 @@ export default async function AuthContainer({ className }: { className?: string 
           /> */}
         </EmptyMedia>
         <EmptyTitle
-          className={`text-7xl ${museoModerno.className} font-medium`}
+          className={`text-7xl ${museoModerno.className} font-medium select-none`}
         >
           simbiont
         </EmptyTitle>
-        <EmptyDescription className="text-3xl">
+        <EmptyDescription className="text-3xl select-none">
           A creative intelligence canvas.
         </EmptyDescription>
       </EmptyHeader>
