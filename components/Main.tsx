@@ -8,9 +8,10 @@ import {
   ReactFlowProvider,
   BackgroundVariant,
   Background,
+  Panel,
 } from "@xyflow/react";
 import TopLeftPanel from "./TepLeftPanel";
-
+import ShortcutGuide from "./ShortcutGuide";
 
 function CanvasComponent() {
   const reactFlowWrapper = useRef(null);
@@ -29,6 +30,9 @@ function CanvasComponent() {
         fitView
         fitViewOptions={{ padding: 1, duration: 1000, interpolate: "smooth" }}
       >
+        <Panel position="bottom-center" className="select-none">
+          <ShortcutGuide />
+        </Panel>
         <Background
           variant={BackgroundVariant.Dots}
           gap={12}
