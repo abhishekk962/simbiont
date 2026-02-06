@@ -6,10 +6,11 @@ import {
   CameraControls,
   Bounds,
   MeshWobbleMaterial,
+  WobbleMaterialProps,
   useGLTF,
 } from "@react-three/drei";
 import * as THREE from "three";
-import { JSX, useRef } from "react";
+import { JSX, useRef, useState } from "react";
 import {
   Bloom,
   DepthOfField,
@@ -25,7 +26,10 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const { nodes } = useGLTF("/3d-logo.glb");
   const mesh = nodes.Curve004 as THREE.Mesh;
 
+  const [hovered, setHovered] = useState(false);
+  
   const ref = useRef<THREE.Group>(null);
+  const materialRef = useRef<any>(undefined);
 
   useFrame(({ pointer, viewport }) => {
     const x = (pointer.x * viewport.width) / 2.5;
@@ -43,10 +47,17 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
       // Smoothly interpolate between current and target rotation
       ref.current.quaternion.slerp(tempObject.quaternion, 0.1);
     }
+    if (materialRef.current) {
+      materialRef.current.factor = materialRef.current.factor * 0.9
+
+      if (hovered) {
+        materialRef.current.factor = materialRef.current.factor + 1.0;
+      }
+    }
   });
 
   return (
-    <group {...props} dispose={null} ref={ref}>
+    <group {...props} dispose={null} ref={ref} >
       <mesh
         castShadow
         receiveShadow
@@ -54,13 +65,15 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
         rotation={[Math.PI / 2, 0, 0]}
         material={mesh.material}
         position={[0, 0, 0]}
+        onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}
       >
         <MeshWobbleMaterial
-          speed={0.4}
-          factor={0.5}
+          speed={0.1}
+          factor={50}
           color="black"
           metalness={0.5}
           roughness={0.1}
+          ref={materialRef}
         />
       </mesh>
     </group>
@@ -88,14 +101,14 @@ export default function Logo({
           <mesh position={[0, 0, 0]} visible={false}>
             <sphereGeometry args={[2, 64, 64]} />
           </mesh>
-          <Environment preset="city" />
+          <Environment preset="forest" />
         </Bounds>
         {canControl && <CameraControls />}
-        {/* <EffectComposer> */}
+        <EffectComposer>
         {/* <DepthOfField /> */}
-        {/* <ChromaticAberration /> */}
+        <ChromaticAberration />
         {/* <Noise opacity={10} /> */}
-        {/* </EffectComposer> */}
+        </EffectComposer>
       </Canvas>
     </div>
   );
