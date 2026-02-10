@@ -34,9 +34,8 @@ export default async function AuthContainer({ className, user }: { className?: s
           /> */}
         </EmptyMedia>
         <EmptyTitle
-          className={`text-5xl ${museoModerno.className} font-medium select-none`}
         >
-          simbiont
+          <div className={`text-5xl ${museoModerno.className} font-medium select-none text-black`}>simbiont</div>
         </EmptyTitle>
         <EmptyDescription className="text-xl select-none">
           A creative intelligence canvas.
