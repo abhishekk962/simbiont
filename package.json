@@ -11,6 +11,7 @@
   "dependencies": {
     "@ai-sdk/devtools": "^0.0.12",
     "@ai-sdk/google": "^3.0.23",
+    "@ai-sdk/provider": "^3.0.8",
     "@ai-sdk/react": "^3.0.80",
     "@auth0/nextjs-auth0": "^4.14.1",
     "@react-three/drei": "^10.7.7",
